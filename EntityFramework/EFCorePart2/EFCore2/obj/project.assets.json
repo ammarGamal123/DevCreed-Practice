@@ -4022,11 +4022,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\iamasd\\OneDrive\\Documents\\Work\\DotNet\\DevCreed-Practice\\EntityFramework\\EFCorePart2\\EFCore2\\EFCore2.csproj",
+      "projectUniqueName": "D:\\Work\\DotNet\\DevCreed-Practice\\EntityFramework\\EFCorePart2\\EFCore2\\EFCore2.csproj",
       "projectName": "EFCore2",
-      "projectPath": "C:\\Users\\iamasd\\OneDrive\\Documents\\Work\\DotNet\\DevCreed-Practice\\EntityFramework\\EFCorePart2\\EFCore2\\EFCore2.csproj",
+      "projectPath": "D:\\Work\\DotNet\\DevCreed-Practice\\EntityFramework\\EFCorePart2\\EFCore2\\EFCore2.csproj",
       "packagesPath": "C:\\Users\\iamasd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\iamasd\\OneDrive\\Documents\\Work\\DotNet\\DevCreed-Practice\\EntityFramework\\EFCorePart2\\EFCore2\\obj\\",
+      "outputPath": "D:\\Work\\DotNet\\DevCreed-Practice\\EntityFramework\\EFCorePart2\\EFCore2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

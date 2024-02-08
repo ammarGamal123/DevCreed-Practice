@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Congfigurations\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
