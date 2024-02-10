@@ -1,5 +1,8 @@
 ﻿using EFCore2.Models;
-using EFCore2.Models;
+using System.Diagnostics;
+using System.Linq;
+using System.Collections.Generic;
+using static EFCore2.Models.ApplicationDbContext;
 
 namespace EFCore2
 {
@@ -9,48 +12,44 @@ namespace EFCore2
         {
             var context = new ApplicationDbContext();
 
-            var blog = context.Blogs.SingleOrDefault(b => b.BlogId == 10);
 
-            Console.WriteLine(blog == null ? "No Items Found" : $"{blog.BlogId} , {blog.Url}");
-       
-        }
-        public static void SeedData()
-        {
-            using (var context = new ApplicationDbContext())
+            var books = context.Books
+                .Join(
+                    context.Authors, // which table i I have the relationship with
+                    book => book.AuthorId,
+                    author => author.Id,
+
+                    (book , author) => new
+                    {
+                        bookId = book.Id,
+                        bookName = book.Name,
+                        authorName = author.Name,
+                        authorNationalityId = author.NationalityId
+                    }
+                    )
+                .Join(
+                    context.Nationalities, // which table i I have the relationship with
+                    book => book.authorNationalityId,
+                    nationality => nationality.NationalityId,
+                    (book , nationality) => new
+                    {
+                        book.bookName,
+                        book.bookId,
+                        book.authorName,
+                        authorNationalityName =  nationality.Name,
+                    }
+                    )
+                .ToList();
+            
+            foreach(var book in books)
             {
-                context.Database.EnsureCreated();
-
-                var blog = context.Blogs.FirstOrDefault(b => b.Url
-                == "www.twitter.com");
-               
-                if (blog == null) {
-                    context.Blogs.Add(new Models.
-                        Blog { Url = "www.twitter.com" });
-                }
-                context.SaveChanges();
+                Console.WriteLine($"Book Id = {book.bookId} , " +
+                    $"Book Name = {book.bookName} , " +
+                    $"Author Name  = {book.authorName} , " +
+                    $"Author Nationality Name = {book.authorNationalityName}");
             }
+
         }
 
-        public static void SeedData2()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                context.Database.EnsureCreated();
-
-                var blog = context.Blogs.FirstOrDefault(b => b.Url
-                == "www.codeforces");
-
-
-
-                if (blog == null)
-                {
-                    context.Blogs.Add(new Models.Blog { Url = "www.codeforces" +
-                        ".com" });
-                }
-                context.SaveChanges();
-            }
-        }
     }
-
-    
 }
