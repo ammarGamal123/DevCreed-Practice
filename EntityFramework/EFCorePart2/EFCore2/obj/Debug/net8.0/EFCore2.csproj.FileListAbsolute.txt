@@ -390,3 +390,8 @@ D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\obj\Debug\n
 D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\obj\Debug\net8.0\EFCore2.pdb
 D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\obj\Debug\net8.0\EFCore2.genruntimeconfig.cache
 D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\obj\Debug\net8.0\ref\EFCore2.dll
+D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\bin\Debug\net8.0\Castle.Core.dll
+D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll
+D:\Work\DotNet\DevCreed-Practice\EntityFramework\EFCorePart2\EFCore2\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll
