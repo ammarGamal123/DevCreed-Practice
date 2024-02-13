@@ -16,9 +16,11 @@ public partial class Post
 
     public string Content { get; set; } = null!;
 
-    public int BlogId { get; set; }
+    public int? BlogId { get; set; }
 
     [ForeignKey("BlogId")]
     [InverseProperty("Posts")]
     public virtual Blog Blog { get; set; } = null!;
+
+    public bool IsDeleted { get; set; }
 }
