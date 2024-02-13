@@ -70,7 +70,7 @@ namespace EFCore2
 
             // Remove && RemoveRange
             
-             * var blog = context.Blogs.Find(3);
+                var blog = context.Blogs.Find(3);
 
             var posts = context.Posts.Where(p => p.BlogId == 3).ToList();
 
@@ -222,7 +222,7 @@ namespace EFCore2
             {
                 Console.WriteLine(item.Name);
             }
-            var book = context.Books.FromSqlRaw("SELECT * FROM Books").ToList();
+            var book = context.Books.FromSqlRaw("SELECT    FROM Books").ToList();
 
             foreach(var b in book)
             {
