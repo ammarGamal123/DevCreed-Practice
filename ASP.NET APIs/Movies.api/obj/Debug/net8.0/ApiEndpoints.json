@@ -64,6 +64,16 @@
   },
   {
     "ContainingType": "Movies.api.Controllers.MoviesController",
+    "Method": "GetAllAsync",
+    "RelativePath": "api/Movies",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Movies.api.Controllers.MoviesController",
     "Method": "CreateAsync",
     "RelativePath": "api/Movies",
     "HttpMethod": "POST",
@@ -105,12 +115,34 @@
   },
   {
     "ContainingType": "Movies.api.Controllers.MoviesController",
-    "Method": "GetAllAsync",
-    "RelativePath": "api/Movies",
+    "Method": "GetByGenreIdAsync",
+    "RelativePath": "api/Movies/{genreId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "genreId",
+        "Type": "System.Byte",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Movies.api.Controllers.MoviesController",
+    "Method": "GetByIdAsync",
+    "RelativePath": "api/Movies/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]
