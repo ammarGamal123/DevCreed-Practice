@@ -19,7 +19,82 @@ namespace Movies.api.Controllers
         {
             this.context = context;
         }
+        [HttpGet]   
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var movies = await context.Movies
+                .OrderByDescending(m => m.Rate)
+                .Include(m => m.Genre)
+                .Select(m => new MovieDetailsDto {
+                    Id = m.Id,
+                    Year = m.Year,
+                    Rate = m.Rate,
+                    StoryLine = m.StoryLine,
+                    GenreId = m.GenreId,
+                    Poster = m.Poster,
+                    GenreName = m.Genre.Name
+                })
+                .ToListAsync();
 
+            return Ok(movies);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetByIdAsync(int id)
+        {
+            var movie = await context.Movies
+                .Include(m => m.Genre)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            var dto = await context.Movies
+                .OrderByDescending(m => m.Rate)
+                .Include(m => m.Genre)
+                .Select(m => new MovieDetailsDto
+                {
+                    Id = movie.Id,
+                    Year = movie.Year,
+                    Rate = movie.Rate,
+                    StoryLine = movie.StoryLine,
+                    GenreId = movie.GenreId,
+                    Poster = movie.Poster,
+                    GenreName = movie.Genre.Name
+                })
+                .ToListAsync();
+
+            return Ok(dto);
+        }
+
+        [HttpGet("{genreId}")]
+        public async Task<IActionResult> GetByGenreIdAsync([FromRoute] byte genreId)
+        {
+             var movies = await context.Movies
+                .OrderByDescending(m => m.Rate)
+                .Where(m => m.GenreId == genreId)
+                .Include(m => m.Genre)
+                .Select(m => new MovieDetailsDto {
+                    Id = m.Id,
+                    Year = m.Year,
+                    Rate = m.Rate,
+                    StoryLine = m.StoryLine,
+                    GenreId = m.GenreId,
+                    Poster = m.Poster,
+                    GenreName = m.Genre.Name
+                })
+                .ToListAsync();
+                
+            
+            if (movies == null)
+            {
+                return NotFound();
+            }
+
+
+            return Ok(movies);
+        }
         [HttpPost]
         //                              Required To get Image from User
         public async Task<IActionResult> CreateAsync([FromForm]MovieDto dto)
@@ -63,26 +138,6 @@ namespace Movies.api.Controllers
                 return Ok(movie);
             }
             return BadRequest(ModelState);
-        }
-
-        [HttpGet]   
-        public async Task<IActionResult> GetAllAsync()
-        {
-            var movies = await context.Movies
-                .OrderByDescending(m => m.Rate)
-                .Include(m => m.Genre)
-                .Select(m => new MovieDetailsDto {
-                    Id = m.Id,
-                    Year = m.Year,
-                    Rate = m.Rate,
-                    StoryLine = m.StoryLine,
-                    GenreId = m.GenreId,
-                    Poster = m.Poster,
-                    GenreName = m.Genre.Name
-                })
-                .ToListAsync();
-
-            return Ok(movies);
         }
 
     }
