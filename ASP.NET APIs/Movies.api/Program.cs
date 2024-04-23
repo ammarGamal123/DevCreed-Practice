@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Movies.api.Models;
+using Movies.api.Services;
 
 namespace Movies.api
 {
@@ -12,6 +13,9 @@ namespace Movies.api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+
+ 
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -26,7 +30,10 @@ namespace Movies.api
 
             //builder.Services.AddAutoMapper(typeof(Program));
 
-
+            builder.Services.AddAutoMapper(typeof(Program));
+            
+            builder.Services.AddTransient<IGenresService, GenreService>();
+            builder.Services.AddTransient<IMovieService, MovieService>(); 
             //Give Access Policy for frontend users to my localhost
             builder.Services.AddCors();
 
