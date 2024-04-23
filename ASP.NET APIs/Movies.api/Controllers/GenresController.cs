@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Movies.api.Services;
 
 namespace Movies.api.Controllers
 {
@@ -8,15 +9,16 @@ namespace Movies.api.Controllers
     [ApiController]
     public class GenresController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public GenresController(ApplicationDbContext context)
+        private readonly IGenresService genresService;
+
+        public GenresController(IGenresService genresService)
         {
-            _context = context;
+            this.genresService = genresService;
         }
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(await _context.Genres.OrderBy(g => g.Name).ToListAsync());
+            return Ok(await genresService.GetAll());
         }
 
         [HttpPost]
@@ -26,11 +28,11 @@ namespace Movies.api.Controllers
             if (ModelState.IsValid)
             {
                 var genre = new Genre() { Name = genreDto.Name };
-
-                await _context.Genres.AddAsync(genre);
-                _context.SaveChanges();
-
+                
+                genresService.Add(genre);
+                
                 return Ok(genre);
+
             }
             return BadRequest(ModelState);
         }
@@ -42,15 +44,15 @@ namespace Movies.api.Controllers
             {
                 // why can't use Find(id) ==> because id data type is not integer
                 // only if integer find(id) is valid
-                var genre = await _context.Genres.SingleOrDefaultAsync(g => g.Id == id);
+                var genre = await genresService.GetById(id);
                 if (genre == null)
                 {
                     return NotFound($"No Genre Was Found With ID {id}");
                 }
-                genre.Name = genreDto.Name;
-                _context.SaveChanges();
-
+                genresService.Update(genre);
+                
                 return Ok(genre);
+
             }
 
             return BadRequest(ModelState);
@@ -60,14 +62,14 @@ namespace Movies.api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync([FromRoute]byte id)
         {
-            var genre = await _context.Genres.SingleOrDefaultAsync(g => g.Id == id);
+            var genre = await genresService.GetById(id);
             if (genre == null)
             {
                 return NotFound($"No Genre Found With ID : {id}");
             }
 
-            _context.Genres.Remove(genre);
-            _context.SaveChanges();
+            genresService.Delete(genre);
+
             return Ok("This Genre has been Deleted Succussfully");
         }
     }
