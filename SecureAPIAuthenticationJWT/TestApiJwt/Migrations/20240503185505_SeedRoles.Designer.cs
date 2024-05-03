@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TestApiJwt.Services;
-using TestApiJwt.Helpers;
+using TestApiJwt;
 using TestApiJwt.Helpers.Models.Data;
 
 
@@ -16,8 +15,8 @@ using TestApiJwt.Helpers.Models.Data;
 namespace TestApiJwt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240503184213_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240503185505_SeedRoles")]
+    partial class SeedRoles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
